@@ -1,0 +1,45 @@
+:root {
+  /* ---------- Colors ---------- */
+
+  --color-background: #050505;
+  --color-surface: #0d0d0d;
+
+  --color-text: #f5f5f5;
+  --color-text-soft: rgba(255,255,255,.68);
+
+  --color-gold: #C8A96A;
+  --color-gold-hover: #D9B87C;
+
+  --color-border: rgba(255,255,255,.08);
+
+  /* ---------- Width ---------- */
+
+  --container-width: 1440px;
+  --container-padding: 48px;
+
+  /* ---------- Radius ---------- */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+
+  /* ---------- Timing ---------- */
+
+  --ease:
+    cubic-bezier(.22,.61,.36,1);
+
+  --speed-fast: .25s;
+  --speed-medium: .55s;
+  --speed-slow: 1s;
+
+  /* ---------- Navbar ---------- */
+
+  --navbar-height: 74px;
+
+  /* ---------- Z Index ---------- */
+
+  --z-nav: 1000;
+  --z-loader: 9999;
+  --z-modal: 9000;
+}
