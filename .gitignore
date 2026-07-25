@@ -22,4 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
 public/videos/*.mp4
+
+# Environment variables
+.env
+.env.local
+
+# Windows system files
+Thumbs.db
