@@ -42,4 +42,9 @@
   --z-nav: 1000;
   --z-loader: 9999;
   --z-modal: 9000;
+
+  /* font tokens */
+
+  --font-heading: "Instrument Serif", serif;
+  --font-body: Inter, system-ui, sans-serif;
 }

@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import "tailwindcss";
 @import "./styles/tokens.css";
+
 
 *,
 *::before,
@@ -15,10 +17,7 @@ body{
   margin:0;
   background:var(--color-background);
   color:var(--color-text);
-  font-family:
-    Inter,
-    system-ui,
-    sans-serif;
+  font-family: var(--font-body);
 
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;

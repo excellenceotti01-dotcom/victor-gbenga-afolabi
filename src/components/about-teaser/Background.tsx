@@ -54,7 +54,7 @@ const Background: FC<BackgroundProps> = ({
         inset-x-0
         bottom-0
         h-56
-        bg-gradient-to-t
+        bg-linear-to-t
         from-black
         via-black/60
         to-transparent

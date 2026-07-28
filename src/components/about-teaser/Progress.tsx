@@ -26,7 +26,7 @@ const Progress: FC<ProgressProps> = ({
     left-1/2
     z-30
     w-full
-    max-w-[1400px]
+    max-w-350
     -translate-x-1/2
     px-8
     md:px-16
@@ -37,14 +37,14 @@ const Progress: FC<ProgressProps> = ({
           <div
             key={index}
             className="
-              h-[2px]
+              h-0.5
               flex-1
               overflow-hidden
               bg-white/20
             "
           >
             <div
-              className="h-full bg-[var(--color-gold)]"
+              className="h-full bg-white"
               style={{
                 width:
                   index < active

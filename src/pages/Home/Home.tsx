@@ -1,6 +1,7 @@
 import Hero from "../../components/hero/Hero";
 import TrustedBy from "../../components/trusted-by/TrustedBy";
 import AboutTeaser from "../../components/about-teaser/AboutTeaser";
+import OnTheRadar from "../../components/news/OnTheRadar";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <AboutTeaser />
+      <OnTheRadar />
     </>
   );
 }
