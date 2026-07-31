@@ -1,0 +1,125 @@
+.site-main-panel {
+  position: relative;
+  z-index: 1;
+  background: var(--color-background);
+  box-shadow: 0 28px 50px rgba(0, 0, 0, 0.34);
+}
+
+.site-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  height: 64svh;
+  min-height: 520px;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--color-gold);
+  background-image:
+    radial-gradient(circle at 14% 12%, rgba(255, 255, 255, 0.2), transparent 26%),
+    radial-gradient(circle at 88% 82%, rgba(64, 42, 12, 0.16), transparent 30%),
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 5px);
+}
+
+.site-footer::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 0.55px, transparent 0.7px);
+  background-size: 4px 4px;
+  content: "";
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/*
+  This zone reserves its own space above the card via flex-grow.
+  Because it's a real layout box (not just an absolutely-positioned
+  overlay sized off a percentage of the whole footer), the card can
+  never grow into it and cover the text — regardless of how tall the
+  card gets at different breakpoints or content lengths.
+*/
+.site-footer-word-zone {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 200px;
+  overflow: visible;
+  display: flex;
+  align-items: flex-start;
+  /* Breathing space between the top of the gold section and the top
+     of the wordmark, matching the reference's comfortable gap.
+     Increase for more space above the text, decrease for less. */
+  padding-top: clamp(2.5rem, 7vw, 5.5rem);
+  /* Pulls the card upward so it overlaps the bottom of the wordmark.
+     Increase the negative value for a deeper overlap, decrease it
+     (closer to 0) for a smaller sliver hidden behind the card. */
+  margin-bottom: -4.25rem;
+}
+
+.site-footer-wordmark {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  margin: 0;
+  color: rgba(34, 24, 10, 0.16);
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 15vw, 15rem);
+  line-height: 0.8;
+  user-select: none;
+  pointer-events: none;
+}
+
+.site-footer-wordmark-char {
+  display: inline-block;
+}
+
+.site-footer-top {
+  position: absolute;
+  top: clamp(1.5rem, 5vw, 4.5rem);
+  right: clamp(1.5rem, 5vw, 5rem);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 0;
+  background: transparent;
+  color: rgba(18, 14, 7, 0.8);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.site-footer-top:hover {
+  color: #111;
+  transform: translateY(-2px);
+}
+
+.site-footer-card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: 0 18px 48px rgba(29, 20, 5, 0.22);
+}
+
+@media (max-width: 1023px) {
+  .site-footer {
+    position: relative;
+    display: block;
+    height: auto;
+    min-height: 0;
+  }
+
+  .site-main-panel {
+    box-shadow: none;
+  }
+
+  .site-footer-word-zone {
+    display: none;
+  }
+}

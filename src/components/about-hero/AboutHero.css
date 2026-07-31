@@ -1,0 +1,141 @@
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: max(46rem, 100svh);
+  overflow: hidden;
+  background: #393939;
+}
+
+.about-hero__portrait {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 0%;
+}
+
+.about-hero__content {
+  display: flex;
+  min-height: inherit;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: clamp(10rem, 20vh, 13rem);
+  padding-bottom: 4rem;
+}
+
+.about-hero__copy {
+  max-width: 32rem;
+}
+
+.about-hero__heading span {
+  display: block;
+}
+
+.about-hero__description {
+  max-width: 31rem;
+  margin: 2rem 0 0;
+}
+
+.about-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: 1.65rem;
+}
+
+.about-hero__cta {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  column-gap: 0.5rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-text);
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.about-hero__cta + .about-hero__cta {
+  color: var(--color-gold);
+}
+
+.about-hero__arrow {
+  transition: transform 300ms ease;
+}
+
+.about-hero__underline {
+  grid-column: 1 / -1;
+  width: 0;
+  height: 1px;
+  margin-top: 0.55rem;
+  background: currentColor;
+  transition: width 300ms ease;
+}
+
+.about-hero__cta:hover .about-hero__arrow,
+.about-hero__cta:focus-visible .about-hero__arrow {
+  transform: translateX(0.5rem);
+}
+
+.about-hero__cta:hover .about-hero__underline,
+.about-hero__cta:focus-visible .about-hero__underline {
+  width: 100%;
+}
+
+.about-hero__cta:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 0.5rem;
+}
+
+.about-hero__metric {
+  align-self: flex-end;
+  margin-bottom: clamp(2.5rem, 5vh, 4rem);
+  color: var(--color-text);
+}
+
+.about-hero__metric span {
+  font-family: var(--font-heading);
+  font-size: clamp(4.5rem, 5vw, 6.5rem);
+  line-height: 0.75;
+}
+
+.about-hero__metric sup {
+  color: var(--color-gold);
+  font-family: var(--font-body);
+  font-size: 0.55em;
+  font-weight: 400;
+}
+
+.about-hero__metric p {
+  margin: 0.65rem 0 0;
+}
+
+@media (max-width: 767px) {
+  .about-hero {
+    min-height: 48rem;
+  }
+
+  .about-hero__portrait {
+    object-position: 62% 30%;
+  }
+
+  .about-hero__content {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: calc(var(--navbar-height) + 5rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .about-hero__description {
+    max-width: 19rem;
+    margin-top: 1.5rem;
+  }
+
+  .about-hero__metric {
+    align-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+}
