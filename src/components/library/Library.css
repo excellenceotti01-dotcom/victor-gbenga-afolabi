@@ -1,0 +1,298 @@
+.library {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding: 5rem 0 3rem;
+  background: var(--color-background);
+}
+
+.library__container {
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: clamp(7rem, 10vh, 8rem);
+  padding-bottom: clamp(2rem, 4vh, 3rem);
+}
+
+.library__header {
+  max-width: 980px;
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.library__eyebrow {
+  margin: 0;
+
+  color: var(--color-gold);
+
+  font-size: .78rem;
+  font-weight: 500;
+
+  letter-spacing: .42em;
+  text-transform: uppercase;
+}
+
+.library__heading {
+  margin: 1rem 0 0;
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  font-weight: 300;
+  line-height: .95;
+  letter-spacing: -.045em;
+  max-width: 920px;
+}
+
+.library__intro {
+  margin-top: 1.2rem;
+
+  max-width: 470px;
+
+  color: rgba(255,255,255,.65);
+
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+/* ====================================================== */
+
+.library__content {
+
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+}
+
+/* ====================================================== */
+
+.library-book {
+  display: grid;
+  grid-template-columns: 340px minmax(0,1fr);
+  gap: clamp(3rem,6vw,6rem);
+  align-items: center;
+}
+
+.library-book__cover-column {
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.library-book__cover {
+
+  width:285px;
+
+  overflow:hidden;
+  border-radius:22px;
+
+  background:rgba(255,255,255,.03);
+
+  box-shadow:
+    0 0 50px rgba(255,255,255,.04),
+    0 30px 80px rgba(0,0,0,.42);
+}
+
+.library-book__cover img{
+
+  display:block;
+  width:100%;
+}
+
+.library-book__meta{
+
+  margin-top:1rem;
+  text-align:center;
+}
+
+.library-book__title{
+
+  margin:0;
+
+  color:white;
+
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+.library-book__author{
+
+  margin-top:.5rem;
+
+  color:rgba(255,255,255,.55);
+
+  font-size:.95rem;
+}
+
+.library-book__content{
+
+  max-width:650px;
+}
+
+.library-book__stage{
+
+  display:inline-flex;
+  align-items:center;
+
+  padding:.45rem .95rem;
+
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+
+  background:rgba(255,255,255,.03);
+
+  color:var(--color-gold);
+
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+
+  margin-bottom:1.4rem;
+}
+
+.library-book__heading{
+
+  margin:0;
+
+  font-family:var(--font-heading);
+
+  font-size:clamp(2.8rem,4vw,4.4rem);
+  font-weight:300;
+
+  line-height:.95;
+  letter-spacing:-.04em;
+}
+
+.library-book__body{
+
+  margin-top:1.8rem;
+
+  max-width:600px;
+
+  color:rgba(255,255,255,.72);
+
+  font-size:1.15rem;
+  line-height:1.9;
+}
+
+/* ====================================================== */
+
+.library-progress {
+  display:flex;
+  gap:1rem;
+  margin-top:3.5rem;
+}
+
+.library-progress__segment{
+
+  position:relative;
+
+  flex:1;
+
+  height:12px;
+
+  overflow:hidden;
+
+  border:none;
+  border-radius:999px;
+
+  cursor:pointer;
+
+  background:rgba(255,255,255,.08);
+
+  transition:transform .25s ease;
+}
+
+.library-progress__segment:hover{
+
+  transform:scaleY(1.2);
+}
+
+.library-progress__fill{
+
+  position:absolute;
+  inset:0;
+
+  transform:scaleX(0);
+  transform-origin:left;
+
+  background:var(--color-gold);
+
+  transition:transform .35s ease;
+}
+
+.library-progress__segment--active
+.library-progress__fill{
+
+  transform:scaleX(1);
+}
+
+/* ====================================================== */
+
+@media (max-width:1024px){
+
+.library{
+
+min-height:auto;
+}
+
+.library__container{
+
+min-height:auto;
+
+padding-top:6rem;
+padding-bottom:6rem;
+}
+
+.library-book{
+
+grid-template-columns:1fr;
+
+gap:3rem;
+}
+
+.library-book__cover-column{
+
+order:1;
+}
+
+.library-book__content{
+
+order:2;
+
+max-width:100%;
+}
+
+.library-book__cover{
+
+width:min(320px,72vw);
+}
+
+}
+
+@media (max-width:768px){
+
+.library__heading{
+
+font-size:3rem;
+}
+
+.library-book__heading{
+
+font-size:2.3rem;
+}
+
+.library-book__body{
+
+font-size:1rem;
+line-height:1.8;
+}
+
+.library-progress{
+
+gap:.5rem;
+}
+
+}

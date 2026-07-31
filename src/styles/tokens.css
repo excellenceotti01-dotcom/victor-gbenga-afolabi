@@ -44,7 +44,5 @@
   --z-modal: 9000;
 
   /* font tokens */
-
-  --font-heading: "Instrument Serif", serif;
-  --font-body: Inter, system-ui, sans-serif;
+  --font: Inter, system-ui, sans-serif;
 }
