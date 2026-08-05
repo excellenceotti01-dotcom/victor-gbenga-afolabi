@@ -1,0 +1,284 @@
+.publications {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+
+
+
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.publications-hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.publications-hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.publications-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.28)
+    );
+}
+
+.publications-hero__content {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: 1320px;
+  margin: 0 auto;
+
+  padding: 12rem 2rem 3rem;
+}
+
+.publications-hero__eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 1.5rem;
+}
+
+.publications-hero__cta {
+  display: inline-block;
+
+  color: inherit;
+  text-decoration: none;
+
+  max-width: 900px;
+
+  font-size: clamp(3rem,6vw,6rem);
+  font-weight: 300;
+  line-height: 1.05;
+}
+
+.publications-hero__arrow {
+  margin-left: .4rem;
+}
+
+.publications-hero__underline {
+  display: block;
+
+  width: 120px;
+  height: 2px;
+
+  margin-top: 1rem;
+
+  background: var(--color-gold);
+}
+
+.publications-hero__publisher {
+  margin-top: 2rem;
+
+  font-size: 1rem;
+
+  color: rgba(255,255,255,.75);
+}
+
+.publications-hero__progress {
+  display: flex;
+  gap: .75rem;
+}
+
+.publications-hero__segment {
+  flex: 1;
+
+  height: 3px;
+
+  border: none;
+
+  padding: 0;
+
+  background: rgba(255,255,255,.2);
+
+  cursor: pointer;
+}
+
+.publications-hero__fill {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  background: var(--color-gold);
+}
+
+.publications-hero__segment:not(.publications-hero__segment--active)
+.publications-hero__fill {
+  opacity: 0;
+}
+
+
+
+
+
+
+/* ========================================
+   INTRO
+======================================== */
+
+.publications__header {
+  max-width: 760px;
+
+  padding: 8rem 0 6rem;
+}
+
+.publications__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .18em;
+
+  font-size: .8rem;
+
+  color: var(--color-gold);
+
+  margin-bottom: 1.5rem;
+}
+
+.publications__heading {
+  font-size: clamp(3rem,5vw,5rem);
+  font-weight: 300;
+  line-height: 1.05;
+
+  margin-bottom: 2rem;
+}
+
+.publications__intro {
+  max-width: 620px;
+
+  color: var(--color-text-muted);
+
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+
+
+
+
+
+/* ========================================
+   LIST
+======================================== */
+
+.publication-list {
+  padding-bottom: 8rem;
+}
+
+.publication-group + .publication-group {
+  margin-top: 5rem;
+}
+
+.publication-group__label {
+  margin-bottom: 2rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: .18em;
+
+  font-size: .75rem;
+
+  color: var(--color-gold);
+}
+
+
+
+
+
+
+/* ========================================
+   ROW
+======================================== */
+
+.publication-row {
+  border-top: 1px solid var(--color-border);
+}
+
+.publication-row:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.publication-row__link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  gap: 4rem;
+
+  align-items: center;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  padding: 2.75rem 0;
+}
+
+.publication-row__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.publication-row__title {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.publication-row__excerpt {
+  max-width: 720px;
+
+  color: var(--color-text-muted);
+
+  line-height: 1.8;
+}
+
+.publication-row__meta {
+  display: flex;
+  gap: 1rem;
+
+  flex-wrap: wrap;
+
+  font-size: .95rem;
+
+  color: var(--color-text-muted);
+}
+
+.publication-row__details {
+  display: flex;
+  gap: .75rem;
+}
+
+.publication-row__dot {
+  opacity: .5;
+}
+
+.publication-row__action {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.publication-row__arrow {
+  display: inline-block;
+}

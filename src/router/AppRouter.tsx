@@ -11,6 +11,7 @@ import About from "@/pages/About/About";
 import Business from "@/pages/Business/Business";
 import Media from "@/pages/Media/Media";
 import Contact from "@/pages/Contact/Contact";
+import Publications from "@/pages/Publications/Publications";
 import BookVGA from "@/pages/BookVGA/BookVGA";
 
 export default function AppRouter() {
@@ -24,6 +25,7 @@ export default function AppRouter() {
           <Route path="/media" element={<Media />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/book-vga" element={<BookVGA />} />
+          <Route path="/publications" element={<Publications />} />
         </Route>
       </Routes>
     </BrowserRouter>
