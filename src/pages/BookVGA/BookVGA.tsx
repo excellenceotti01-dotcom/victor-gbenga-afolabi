@@ -1,7 +1,7 @@
 export default function BookVGA() {
   return (
     <>
-      <h1>Book PGA</h1>
+      <h1>Book VGA</h1>
     </>
   );
 }

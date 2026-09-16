@@ -1,8 +1,14 @@
-import { useRef } from "react";
-import Container from "../ui/Container";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useHeroIntro from "./useHeroIntro";
+import heroVideo from "@/assets/videos/hero-placeholder.mp4";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
 
   const lineOneRef = useRef<HTMLHeadingElement>(null);
@@ -24,8 +30,30 @@ export default function Hero() {
     convenerRef,
   });
 
+  useLayoutEffect(() => {
+    const hero = heroRef.current;
+    const content = contentRef.current;
+
+    if (!hero || !content || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const context = gsap.context(() => {
+      gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.7,
+          invalidateOnRefresh: true,
+        },
+      }).to(content, { x: -80, autoAlpha: 0, duration: 1 });
+    }, hero);
+
+    return () => context.revert();
+  }, []);
+
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
       {/* Background Video */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
@@ -33,9 +61,10 @@ export default function Hero() {
         muted
         loop
         playsInline
+        preload="metadata"
       >
         <source
-          src="/videos/hero-placeholder.mp4"
+          src={heroVideo}
           type="video/mp4"
         />
       </video>
@@ -44,8 +73,8 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/55" />
 
       {/* Content */}
-      <Container className="relative z-10 flex h-full items-center">
-        <div className="max-w-262.5">
+      <div ref={contentRef} className="absolute bottom-[clamp(2rem,6vh,5.5rem)] left-[clamp(1.25rem,3.5vw,4rem)] z-10 max-w-262.5">
+        <div>
 
           {/* ===========================
               HEADER AREA
@@ -64,7 +93,7 @@ export default function Hero() {
                 className="
                   text-[4rem]
                   md:text-[5.2rem]
-                  font-light
+                  font-medium
                   uppercase
                   tracking-[-0.04em]
                   leading-[0.95]
@@ -81,7 +110,7 @@ export default function Hero() {
                   mt-2
                   text-[4rem]
                   md:text-[5.2rem]
-                  font-light
+                  font-medium
                   uppercase
                   tracking-[-0.04em]
                   leading-[0.95]
@@ -102,7 +131,7 @@ export default function Hero() {
                 inset-0
                 text-[4.2rem]
                 md:text-[5.6rem]
-                font-light
+                font-medium
                 uppercase
                 tracking-[-0.04em]
                 leading-[0.95]
@@ -121,21 +150,13 @@ export default function Hero() {
           ============================ */}
 
           <div className="flex gap-14 uppercase tracking-[0.24em] text-sm text-white">
-            <span ref={founderRef}>
-              Founder
-            </span>
-
-            <span ref={investorRef}>
-              Investor
-            </span>
-
-            <span ref={convenerRef}>
-              Convener
-            </span>
+            <span ref={founderRef}>Founder</span>
+            <span ref={investorRef}>Investor</span>
+            <span ref={convenerRef}>Convener</span>
           </div>
 
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

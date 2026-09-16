@@ -1,3 +1,5 @@
+import heroVideo from "@/assets/videos/hero-placeholder.mp4";
+
 export default function HeroVideo() {
   return (
     <video
@@ -6,8 +8,9 @@ export default function HeroVideo() {
       muted
       loop
       playsInline
+      preload="metadata"
     >
-      <source src="/videos/hero-placeholder.mp4" type="video/mp4" />
+      <source src={heroVideo} type="video/mp4" />
     </video>
   );
 }

@@ -44,7 +44,7 @@ const Progress: FC<ProgressProps> = ({
             "
           >
             <div
-              className="h-full bg-white"
+              className="h-full bg-white transition-[width] duration-100 ease-linear"
               style={{
                 width:
                   index < active

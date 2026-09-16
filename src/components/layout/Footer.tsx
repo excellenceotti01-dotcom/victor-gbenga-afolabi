@@ -7,12 +7,13 @@ import "./Footer.css";
 
 type FooterProps = {
   onBackToTop: () => void;
+  onBookClick: () => void;
 };
 
 const exploreLinks = [
   { label: "About", to: "/about" },
   { label: "Business", to: "/business" },
-  { label: "Library", to: "/library" },
+  { label: "Library", to: "/about#library" },
   { label: "Media", to: "/media" },
   { label: "Contact", to: "/contact" },
 ];
@@ -26,7 +27,7 @@ const connectLinks = [
   { label: "Email", href: "mailto:hello@victorgbengaafolabi.com" },
 ];
 
-export default function Footer({ onBackToTop }: FooterProps) {
+export default function Footer({ onBackToTop, onBookClick }: FooterProps) {
   return (
     <footer className="site-footer" aria-label="Site footer">
       <button type="button" onClick={onBackToTop} className="site-footer-top">
@@ -55,7 +56,7 @@ export default function Footer({ onBackToTop }: FooterProps) {
               <p className="mt-4 max-w-sm text-sm leading-6 text-white/60">
                 Marketing strategist, convener, and brand builder creating work that moves people, businesses, and culture forward.
               </p>
-              <Button to="/book-vga" className="mt-7 inline-flex">Book VGA</Button>
+              <Button onClick={onBookClick} className="mt-7">Book VGA</Button>
             </div>
 
             <nav aria-label="Explore">

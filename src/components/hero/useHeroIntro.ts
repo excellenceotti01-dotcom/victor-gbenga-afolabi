@@ -9,7 +9,6 @@ type HeroIntroRefs = {
   lineTwoRef: RefObject<HTMLHeadingElement | null>;
 
   nameRef: RefObject<HTMLHeadingElement | null>;
-
   founderRef: RefObject<HTMLSpanElement | null>;
   investorRef: RefObject<HTMLSpanElement | null>;
   convenerRef: RefObject<HTMLSpanElement | null>;
@@ -46,15 +45,8 @@ export default function useHeroIntro({
     });
 
     gsap.set(
-      [
-        founderRef.current,
-        investorRef.current,
-        convenerRef.current,
-      ],
-      {
-        opacity: 0,
-        y: 14,
-      }
+      [founderRef.current, investorRef.current, convenerRef.current],
+      { opacity: 0, y: 14 },
     );
 
     const tl = gsap.timeline({
@@ -92,42 +84,16 @@ export default function useHeroIntro({
         "-=0.35"
       )
 
-      // Founder
       .to(
         founderRef.current,
-        {
-          opacity: 0.28,
-          y: 0,
-          duration: 0.45,
-        },
-        "+=0.15"
+        { opacity: 0.28, y: 0, duration: 0.45 },
+        "+=0.15",
       )
-
-      // Investor
-      .to(investorRef.current, {
-        opacity: 0.28,
-        y: 0,
-        duration: 0.45,
-      })
-
-      // Convener
-      .to(convenerRef.current, {
-        opacity: 0.28,
-        y: 0,
-        duration: 0.45,
-      })
-
-      // Final emphasis
+      .to(investorRef.current, { opacity: 0.28, y: 0, duration: 0.45 })
+      .to(convenerRef.current, { opacity: 0.28, y: 0, duration: 0.45 })
       .to(
-        [
-          founderRef.current,
-          investorRef.current,
-          convenerRef.current,
-        ],
-        {
-          opacity: 1,
-          duration: 0.45,
-        }
+        [founderRef.current, investorRef.current, convenerRef.current],
+        { opacity: 1, duration: 0.45 },
       );
 
     return () => {

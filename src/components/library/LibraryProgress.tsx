@@ -1,34 +1,36 @@
+import { forwardRef } from "react";
+
 type Props = {
   books: number[];
   activeBook: number;
-  onSelect: (index: number) => void;
 };
 
-export default function LibraryProgress({
-  books,
-  activeBook,
-  onSelect,
-}: Props) {
+const LibraryProgress = forwardRef<HTMLElement, Props>(function LibraryProgress(
+  { books, activeBook },
+  ref,
+) {
   return (
     <nav
+      ref={ref}
       className="library-progress"
       aria-label="Library progress"
     >
       {books.map((book, index) => (
-        <button
+        <span
           key={book}
-          type="button"
           className={`library-progress__segment ${
             index === activeBook
               ? "library-progress__segment--active"
               : ""
           }`}
-          aria-label={`Go to book ${index + 1}`}
-          onClick={() => onSelect(index)}
+          aria-label={`Book ${index + 1}`}
+          aria-current={index === activeBook ? "true" : undefined}
         >
           <span className="library-progress__fill" />
-        </button>
+        </span>
       ))}
     </nav>
   );
-}
+});
+
+export default LibraryProgress;

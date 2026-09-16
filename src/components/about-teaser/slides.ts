@@ -54,7 +54,7 @@ export const slides = [
     cta: "View Library",
     imagePosition: "60% 0%",
 
-    href: "/about/library",
+    href: "/about#library",
 
     image: "/images/about/library.jpg",
   },

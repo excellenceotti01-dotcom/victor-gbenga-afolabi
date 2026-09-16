@@ -19,6 +19,8 @@ export type Publication = {
 
   thumbnail: string;
 
+  coverKind?: "placeholder" | "image";
+
   imagePosition: string;
 
   excerpt: string;
@@ -80,7 +82,7 @@ export const publicationItems: Publication[] = [
       "Trust isn't designed with a single feature—it's built through hundreds of thoughtful decisions.",
 
     url:
-      "/publications/building-products-that-earn-user-trust",
+      "/publications/building-trust",
   },
 
   {
@@ -138,7 +140,7 @@ export const publicationItems: Publication[] = [
       "Communication is one of the strongest competitive advantages a product team can build.",
 
     url:
-      "/publications/how-great-product-teams-communicate",
+      "/publications/better-teams",
   },
 ];
 

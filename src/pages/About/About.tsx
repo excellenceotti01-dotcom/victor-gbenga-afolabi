@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router-dom";
 
 import AboutHero from "@/components/about-hero/AboutHero";
 import Biography from "@/components/biography/Biography";
+import InMotion from "@/components/in-motion/InMotion";
 import Library from "@/components/library/Library";
 
 type LayoutContext = {
@@ -19,8 +20,14 @@ export default function About() {
 
           if (biography) scrollTo(biography);
         }}
+        onViewLibrary={() => {
+          const library = document.getElementById("library");
+
+          if (library) scrollTo(library);
+        }}
       />
       <Biography />
+      <InMotion />
       <Library />
     </>
   );

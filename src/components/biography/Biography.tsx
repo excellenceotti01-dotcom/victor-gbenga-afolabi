@@ -12,18 +12,18 @@ import { biographyChapters, type BiographyChapter } from "./chapters";
 gsap.registerPlugin(ScrollTrigger);
 
 type ChapterStyle = CSSProperties & {
-  "--fallen-offset": string;
-  "--fallen-rotation": string;
   "--chapter-index": number;
+  "--stack-offset": string;
 };
 
 export default function Biography() {
   const [selectedChapter, setSelectedChapter] = useState<BiographyChapter | null>(null);
-  const [activeChapterIndex, setActiveChapterIndex] = useState(0);
+  const pinRef = useRef<HTMLDivElement | null>(null);
+  const stackRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const readerRef = useRef<HTMLElement | null>(null);
-  const readerArrivalRef = useRef<HTMLDivElement | null>(null);
   const readerOverlayRef = useRef<HTMLDivElement | null>(null);
+  const readerPanelRef = useRef<HTMLElement | null>(null);
   const readerScrollRef = useRef<HTMLDivElement | null>(null);
   const originRef = useRef<DOMRect | null>(null);
   const entryTimelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -54,26 +54,64 @@ export default function Biography() {
       .map((chapter) => cardRefs.current[chapter.id])
       .filter((card): card is HTMLButtonElement => card !== null);
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     const context = gsap.context(() => {
-      cards.forEach((card, index) => {
-        ScrollTrigger.create({
-          onEnter: () => setActiveChapterIndex(index),
-          onLeaveBack: () => setActiveChapterIndex(Math.max(0, index - 1)),
-          start: "top 14%",
-          trigger: card,
-        });
+      gsap.set(cards, {
+        scale: 1,
+        transformOrigin: "center top",
       });
-    });
+
+      gsap.set(cards.slice(1), { yPercent: 110 });
+
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: pinRef.current,
+          id: "biography-story",
+          start: "top top",
+          end: () => `+=${window.innerHeight * cards.length}`,
+          pin: pinRef.current,
+          pinSpacing: false,
+          scrub: 0.7,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      timeline.to({}, { duration: 0.35 });
+
+      cards.slice(1).forEach((incomingCard, incomingIndex) => {
+        const precedingCards = cards.slice(0, incomingIndex + 1);
+        const stage = `card-${incomingIndex + 2}`;
+
+        timeline
+          .to(incomingCard, { yPercent: 0, duration: 1 }, stage)
+          .to(
+            precedingCards,
+            {
+              scale: (cardIndex) =>
+                1 - (precedingCards.length - cardIndex) * 0.04,
+              duration: 1,
+            },
+            stage,
+          );
+      });
+
+      timeline.to({}, { duration: 0.35 });
+    }, stackRef);
 
     return () => context.revert();
   }, []);
 
   useLayoutEffect(() => {
-    if (!selectedChapter || !readerRef.current || !readerArrivalRef.current || !readerOverlayRef.current || !originRef.current) return;
+    if (!selectedChapter || !readerRef.current || !readerOverlayRef.current || !readerPanelRef.current || !originRef.current) return;
 
     const reader = readerRef.current;
-    const arrival = readerArrivalRef.current;
     const overlay = readerOverlayRef.current;
+    const panel = readerPanelRef.current;
     const card = cardRefs.current[selectedChapter.id];
     const origin = originRef.current;
     const timeline = gsap.timeline({ defaults: { ease: "power3.inOut" } });
@@ -87,7 +125,8 @@ export default function Biography() {
       x: origin.left,
       y: origin.top,
     });
-    gsap.set([arrival, overlay], { autoAlpha: 0 });
+    gsap.set(overlay, { autoAlpha: 0 });
+    gsap.set(panel, { yPercent: 100 });
     readerScrollRef.current?.scrollTo({ top: 0 });
 
     if (card) timeline.to(card, { duration: 0.18, y: -8 });
@@ -103,7 +142,7 @@ export default function Biography() {
         y: 0,
       }, "<")
       .to(overlay, { autoAlpha: 1, duration: 0.45 }, "-=0.35")
-      .to(arrival, { autoAlpha: 1, duration: 0.5, ease: "power2.out" }, "-=0.1");
+      .to(panel, { yPercent: 0, duration: 0.85, ease: "power3.out" }, "-=0.1");
 
     entryTimelineRef.current = timeline;
 
@@ -122,16 +161,31 @@ export default function Biography() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   });
 
-  return (
-    <section id="biography" className="biography" aria-labelledby="biography-heading" tabIndex={-1}>
-      <Container>
-        <header className="biography__header">
-          <p className="text-sm uppercase tracking-[0.45em] text-(--color-gold)">Biography</p>
-          <h2 id="biography-heading" className="mt-5 text-5xl font-light leading-[0.95] tracking-[-0.04em] md:text-6xl xl:text-7xl">A life in chapters.</h2>
-        </header>
+  useEffect(() => {
+    if (!selectedChapter) return;
 
-        <div className="biography__stack">
-          {biographyChapters.map((chapter, index) => (
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousDocumentOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousDocumentOverflow;
+    };
+  }, [selectedChapter]);
+
+  return (
+    <section id="biography" data-scroll-trigger-id="biography-story" className="biography" aria-labelledby="biography-heading" tabIndex={-1}>
+      <div ref={pinRef} className="biography__pin">
+        <Container>
+          <header className="biography__header">
+            <h2 id="biography-heading" className="text-5xl font-medium leading-[0.95] tracking-[-0.04em] md:text-6xl xl:text-7xl">A life in chapters.</h2>
+          </header>
+
+          <div ref={stackRef} className="biography__stack">
+            {biographyChapters.map((chapter, index) => (
             <button
               key={chapter.id}
               ref={(element) => {
@@ -140,42 +194,47 @@ export default function Biography() {
               type="button"
               className="biography__chapter"
               style={{
-                "--fallen-offset": `${Math.max(0, activeChapterIndex - index) * 5}px`,
-                "--fallen-rotation": `${Math.max(0, activeChapterIndex - index) * -0.15}deg`,
                 "--chapter-index": index,
+                "--stack-offset": `${index * 14}px`,
               } as ChapterStyle}
-              data-state={index < activeChapterIndex ? "fallen" : index === activeChapterIndex ? "active" : "waiting"}
               onClick={() => openChapter(chapter)}
             >
-              <img src={chapter.image} alt="" />
+              <img
+                src={chapter.image}
+                alt=""
+                style={{ objectPosition: chapter.imagePosition }}
+              />
               <span className="biography__chapter-content">
-                <span className="biography__chapter-subtitle">{chapter.subtitle}</span>
                 <span className="biography__chapter-title">{chapter.title}</span>
                 <span className="biography__chapter-enter" aria-hidden="true">Enter chapter →</span>
               </span>
             </button>
-          ))}
-        </div>
-      </Container>
+            ))}
+          </div>
+        </Container>
+      </div>
 
       {selectedChapter && (
         <section ref={readerRef} className="biography__reader" aria-label={`${selectedChapter.title} chapter`} data-lenis-prevent tabIndex={-1}>
-          <img className="biography__reader-image" src={selectedChapter.image} alt="" />
+          <img
+            className="biography__reader-image"
+            src={selectedChapter.image}
+            alt=""
+            style={{ "--reader-image-position": selectedChapter.imagePosition } as CSSProperties}
+          />
           <div ref={readerOverlayRef} className="biography__reader-overlay" />
-          <button type="button" className="biography__back" onClick={closeChapter}>
-            <span className="biography__back-label">← Back to Chapters</span>
-            <span className="biography__back-underline" aria-hidden="true" />
-          </button>
-          <div ref={readerScrollRef} className="biography__reader-scroll">
-            <div ref={readerArrivalRef} className="biography__arrival">
-              <Container>
-                <p className="text-sm uppercase tracking-[0.45em] text-(--color-gold)">{selectedChapter.subtitle}</p>
-                <h2 className="mt-5 text-5xl font-light leading-[0.95] tracking-[-0.04em] text-white md:text-6xl xl:text-7xl">{selectedChapter.title}</h2>
-                <p>{selectedChapter.introduction}</p>
-              </Container>
-            </div>
-            <article className="biography__reading-panel">
-              <Container className="biography__reading-content">
+          <article ref={readerPanelRef} className="biography__reading-panel">
+              <Container className="biography__reading-container">
+                <div className="biography__reading-content">
+                  <button type="button" className="biography__back" onClick={closeChapter}>
+                    <span className="biography__back-label">← Back to Chapters</span>
+                    <span className="biography__back-underline" aria-hidden="true" />
+                  </button>
+                  <div className="biography__reading-hero">
+                    <h2 className="biography__reading-heading">{selectedChapter.readingHeading}</h2>
+                    <p className="biography__reading-introduction">{selectedChapter.introduction}</p>
+                  </div>
+                  <div ref={readerScrollRef} className="biography__reading-body" data-lenis-prevent>
                 {selectedChapter.content.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -192,9 +251,10 @@ export default function Biography() {
                     <span className="biography__cta-underline" aria-hidden="true" />
                   </button>
                 )}
+                  </div>
+                </div>
               </Container>
-            </article>
-          </div>
+          </article>
         </section>
       )}
     </section>

@@ -2,10 +2,14 @@ import type { MediaItem } from "./mediaData";
 
 type Props = {
   item: MediaItem;
+  isHighlighted: boolean;
+  onSelect: () => void;
 };
 
 export default function MediaCard({
   item,
+  isHighlighted,
+  onSelect,
 }: Props) {
   return (
     <button
@@ -14,7 +18,11 @@ export default function MediaCard({
         media-card
         media-card--${item.type}
         media-card--${item.layout}
+        ${isHighlighted ? "media-card--highlighted" : ""}
       `}
+      data-media-id={item.id}
+      aria-label={item.title}
+      onClick={onSelect}
     >
       <div className="media-card__image-wrapper">
         <img
@@ -44,6 +52,11 @@ export default function MediaCard({
             YouTube
           </div>
         )}
+
+        <span className="media-card__meta">
+          <span className="media-card__name">{item.title}</span>
+          <span className="media-card__action">View details →</span>
+        </span>
       </div>
     </button>
   );

@@ -1,0 +1,35 @@
+.business-page { position: relative; isolation: isolate; min-height: 100svh; overflow: hidden; overflow-anchor: none; background: var(--business-background); color: var(--business-text); outline: none; transition: background-color 1.05s var(--ease), color 1.05s var(--ease); }
+:root[data-business-navigation] [data-site-navbar] nav { background: rgba(255, 255, 255, .76) !important; border-color: rgba(14, 24, 51, .1) !important; box-shadow: 0 .45rem 1.5rem rgba(14, 24, 51, .08), inset 0 1px 0 rgba(255, 255, 255, .58) !important; }
+:root[data-business-navigation] [data-site-navbar] nav > a, :root[data-business-navigation] [data-site-navbar] nav > div > a { color: var(--business-navigation-text) !important; }
+:root[data-business-navigation] [data-site-navbar] nav > div > a { position: relative; }
+:root[data-business-navigation] [data-site-navbar] nav > div > a:hover,
+:root[data-business-navigation] [data-site-navbar] nav > div > a[aria-current="page"] { color: var(--business-navigation-brand) !important; }
+:root[data-business-navigation] [data-site-navbar] nav > div > a[aria-current="page"]::after { position: absolute; right: 0; bottom: -.52rem; left: 0; height: 2px; border-radius: 999px; background: var(--business-navigation-brand); content: ""; transition: background-color .3s var(--ease); }
+:root[data-business-navigation] [data-site-navbar] nav > div > button { background: var(--business-navigation-brand) !important; color: #fff !important; }
+:root[data-business-navigation] [data-site-navbar] nav > div > button:hover { background: var(--business-navigation-brand-hover) !important; }
+:root[data-business-navigation="dark"] [data-site-navbar] nav { background: rgba(0, 18, 51, .38) !important; border-color: rgba(255, 255, 255, .16) !important; box-shadow: 0 .45rem 1.5rem rgba(0, 0, 0, .18), inset 0 1px 0 rgba(255, 255, 255, .1) !important; }
+.business-page--locked { position: fixed; inset: 0; z-index: 1; width: 100%; }
+.business-page__atmosphere, .business-page__atmosphere::before, .business-page__atmosphere::after { position: absolute; inset: 0; pointer-events: none; }
+.business-page__atmosphere { z-index: -3; background: var(--business-image) 68% center / cover no-repeat; opacity: 1; transform: scale(1.04); transition: background-image 1.05s var(--ease), opacity 1.05s var(--ease); }
+.business-page__atmosphere::before { content: ""; background: linear-gradient(90deg, color-mix(in srgb, var(--business-background) 28%, transparent) 0%, transparent 54%); }
+.business-page__atmosphere::after { content: ""; background: radial-gradient(ellipse at 7% 76%, var(--business-atmosphere), transparent 44%); opacity: .34; }
+.business-carousel-3d { position: absolute; z-index: 2; top: var(--navbar-height); right: 0; bottom: 0; width: min(67vw, 66rem); touch-action: pan-y; }
+.business-carousel-3d canvas { display: block; width: 100% !important; height: 100% !important; cursor: pointer; }
+.business-carousel-3d__active-hit { position: absolute; z-index: 1; top: 50%; left: 50%; width: min(36vw, 31rem); height: min(31vh, 17rem); border: 0; padding: 0; background: transparent; cursor: pointer; transform: translate(-50%, -50%); }
+.business-carousel-3d__active-hit:focus-visible { outline: 2px solid var(--business-accent); outline-offset: .45rem; }
+.business-page__container { position: relative; z-index: 3; min-height: 100svh; display: flex; flex-direction: column; padding-top: var(--navbar-height); pointer-events: none; }
+.business-page__experience { display: flex; flex: 1; flex-direction: column; justify-content: center; max-width: min(42rem, 54vw); }
+.active-business { width: min(54vw, 52rem); max-width: none; pointer-events: auto; }
+.active-business__logo { display: flex; align-items: center; height: clamp(4.25rem, 7vw, 6.5rem); margin: 0 0 clamp(.9rem, 1.7vw, 1.35rem); }
+.active-business__logo img { display: block; max-width: min(18rem, 35vw); max-height: 100%; width: auto; height: auto; object-fit: contain; object-position: left center; }
+.active-business__category { margin: 0 0 1.25rem; color: var(--business-accent); font-size: .68rem; font-weight: 600; letter-spacing: .2em; line-height: 1.2; text-transform: uppercase; }
+.active-business__name { display: -webkit-box; width: 100%; max-width: none; height: clamp(7.05rem, 13.12vw, 14.78rem); margin: 0; overflow: hidden; color: var(--business-text); font-size: clamp(4rem, 7.45vw, 8.4rem); font-weight: 500; line-height: .88; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.active-business__tagline { max-width: 37rem; margin: clamp(1.4rem, 2.5vw, 2rem) 0 0; color: var(--business-text); font-size: clamp(1.12rem, 1.55vw, 1.45rem); line-height: 1.4; }
+.active-business__summary { max-width: 34rem; margin: 1.1rem 0 0; color: var(--business-muted-text); font-size: .98rem; line-height: 1.75; }
+.active-business__metrics { display: flex; flex-wrap: wrap; gap: 2rem; margin: 2rem 0 0; }.active-business__metrics div { display: grid; gap: .3rem; }.active-business__metrics dt { color: var(--business-muted-text); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }.active-business__metrics dd { margin: 0; color: var(--business-text); font-family: var(--font-heading); font-size: 1.3rem; }
+.active-business__cta { margin-top: 2.15rem; background: var(--business-brand) !important; color: #fff !important; }
+.active-business__cta:hover { background: var(--business-brand-hover) !important; }
+.business-pagination__dot, .business-carousel__dot { background: var(--business-inactive-dot); }
+.business-pagination__dot[aria-current="true"], .business-carousel__dot[aria-current="true"] { background: var(--business-brand); }
+@media (max-width: 767px) { .business-page { min-height: 100svh; }.business-carousel-3d { top: calc(var(--navbar-height) + 1rem); right: -16vw; width: 122vw; height: 54svh; opacity: .8; }.business-carousel-3d__active-hit { width: 75vw; height: 24vh; }.business-page__atmosphere { background-position: 65% top; opacity: 1; }.business-page__atmosphere::before { background: linear-gradient(180deg, color-mix(in srgb, var(--business-background) 38%, transparent), color-mix(in srgb, var(--business-background) 68%, transparent)); }.business-page__container { padding-top: var(--navbar-height); }.business-page__experience { justify-content: flex-end; max-width: 100%; padding-bottom: clamp(2rem, 6vh, 4rem); }.active-business { width: 100%; }.active-business__logo { height: 4.5rem; margin-bottom: .85rem; }.active-business__logo img { max-width: 13rem; }.active-business__name { max-width: 21rem; height: clamp(6.16rem, 27.28vw, 9.16rem); font-size: clamp(3.5rem, 15.5vw, 5.2rem); }.active-business__tagline { max-width: 20rem; font-size: 1.1rem; }.active-business__summary { max-width: 21rem; font-size: .92rem; }.active-business__cta { margin-top: 1.6rem; } }
+@media (prefers-reduced-motion: reduce) { .business-page, .business-page__atmosphere { transition: none; } }

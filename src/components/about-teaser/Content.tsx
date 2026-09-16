@@ -2,19 +2,19 @@ import type { FC } from "react";
 import { motion } from "framer-motion";
 
 type ContentProps = {
-  chapter: string;
   title: string[];
   description: string;
   cta: string;
+  onCta: () => void;
   onPause?: () => void;
   onResume?: () => void;
 };
 
 const Content: FC<ContentProps> = ({
-  chapter,
   title,
   description,
   cta,
+  onCta,
   onPause,
   onResume,
 }) => {
@@ -43,26 +43,6 @@ const Content: FC<ContentProps> = ({
         onMouseLeave={onResume}
         >
 
-          {/* Chapter */}
-
-          <motion.p
-  key={`chapter-${chapter}`}
-  initial={{ opacity: 0, y: 12 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    duration: 0.9,
-    ease: [0.4, 0, 0.2, 1],
-  }}
-  className="
-    mb-8
-    text-sm
-    uppercase
-    tracking-[0.45em]
-    text-[var(--color-gold)]
-  "
->
-  {chapter}
-</motion.p>
           {/* Headline */}
 
           <motion.h2
@@ -78,7 +58,7 @@ const Content: FC<ContentProps> = ({
     mb-10
     text-5xl
     md:text-7xl
-    font-light
+    font-medium
     leading-[0.95]
     tracking-[-0.04em]
     text-white
@@ -127,6 +107,8 @@ const Content: FC<ContentProps> = ({
           {/* CTA */}
 
           <motion.button
+  type="button"
+  onClick={onCta}
   key={`cta-${cta}`}
   initial={{ opacity: 0, y: 14 }}
   animate={{ opacity: 1, y: 0 }}

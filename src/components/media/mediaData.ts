@@ -66,7 +66,7 @@ export const mediaCategories = [
   },
 ] as const;
 
-export const mediaItems: MediaItem[] = [
+const mediaSourceItems: MediaItem[] = [
   {
     id: "mark-hack",
 
@@ -160,6 +160,15 @@ export const mediaItems: MediaItem[] = [
   },
 ];
 
+export const mediaItems: MediaItem[] = Array.from(
+  { length: 3 },
+  (_, archiveIndex) => mediaSourceItems.map((item) => ({
+    ...item,
+    id: archiveIndex === 0 ? item.id : `${item.id}-${archiveIndex + 1}`,
+    featured: archiveIndex === 0 ? item.featured : false,
+  })),
+).flat();
+
 export const featuredMedia = mediaItems.filter(
   (item) => item.featured
-);
+).slice(0, 2);

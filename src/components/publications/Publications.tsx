@@ -1,7 +1,6 @@
 import Container from "../ui/Container";
 
 import PublicationsHero from "./PublicationsHero";
-import PublicationsHeader from "./PublicationsHeader";
 import PublicationList from "./PublicationList";
 
 import {
@@ -16,15 +15,13 @@ export default function Publications() {
     <section
       id="publications"
       className="publications"
-      aria-labelledby="publications-heading"
+      aria-label="Publications"
     >
       <PublicationsHero
         items={featuredPublications}
       />
 
-      <Container>
-        <PublicationsHeader />
-
+      <Container className="publications__archive">
         <PublicationList
           items={publicationItems}
         />

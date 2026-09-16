@@ -1,5 +1,4 @@
-import PublicationRow from "./PublicationRow";
-
+import PublicationShowcase from "./PublicationShowcase";
 import type { Publication } from "./publicationData";
 
 type Props = {
@@ -9,44 +8,27 @@ type Props = {
 export default function PublicationList({
   items,
 }: Props) {
-  const internal = items.filter(
-    (item) => item.type === "internal"
-  );
-
-  const external = items.filter(
-    (item) => item.type === "external"
-  );
+  const insightItems = items.filter((item) => item.type === "internal");
+  const coverageItems = items.filter((item) => item.type === "external");
 
   return (
     <section
       className="publication-list"
       aria-label="Latest publications"
     >
-      <div className="publication-group">
-        <p className="publication-group__label">
-          Written by Victor
-        </p>
+      <PublicationShowcase
+        sectionId="insights"
+        title="VGA Insights"
+        description="Original thinking on leadership, products, technology and building enduring institutions."
+        items={insightItems}
+      />
 
-        {internal.map((item) => (
-          <PublicationRow
-            key={item.id}
-            item={item}
-          />
-        ))}
-      </div>
-
-      <div className="publication-group">
-        <p className="publication-group__label">
-          In the Press
-        </p>
-
-        {external.map((item) => (
-          <PublicationRow
-            key={item.id}
-            item={item}
-          />
-        ))}
-      </div>
+      <PublicationShowcase
+        sectionId="media-coverage"
+        title="Media Coverage"
+        description="Selected conversations, interviews and stories featuring Victor Gbenga Afolabi across the media landscape."
+        items={coverageItems}
+      />
     </section>
   );
 }

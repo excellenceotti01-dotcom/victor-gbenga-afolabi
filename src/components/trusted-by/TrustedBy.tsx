@@ -1,85 +1,30 @@
-import { motion } from "framer-motion";
-
 import Container from "../ui/Container";
 import logos from "./logos";
 
+import "./TrustedBy.css";
+
 export default function TrustedBy() {
   return (
-    <section className="relative overflow-hidden bg-black py-16">
-
+    <section className="trusted-by" aria-label="Trusted partnerships">
       <Container>
-
-        <div className="flex flex-col items-center gap-10">
-
-          {/* Heading */}
-
-          <p
-            className="
-              text-sm
-              font-medium
-              uppercase
-              tracking-[0.45em]
-              text-(--color-gold)
-            "
+        <div className="trusted-by__layout">
+          <div
+            className="trusted-by__marquee"
+            aria-label={`Trusted organizations: ${logos.join(", ")}`}
           >
-            Trusted By
-          </p>
-
-          {/* Marquee */}
-
-          <div className="relative w-full overflow-hidden">
-
-            {/* Left Fade */}
-
-            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-28 bg-linear-to-r from-black to-transparent" />
-
-            {/* Right Fade */}
-
-            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-28 bg-linear-to-l from-black to-transparent" />
-
-            <motion.div
-              className="flex w-max"
-              animate={{
-                x: ["0%", "-50%"],
-              }}
-              transition={{
-                duration: 40,
-                ease: "linear",
-                repeat: Infinity,
-              }}
-            >
-              {[...logos, ...logos].map((logo, index) => (
-                <div
-                  key={`${logo}-${index}`}
-                  className="
-                    flex
-                    items-center
-                    justify-center
-                    px-8
-                    lg:px-10
-                    shrink-0
-                  "
-                >
-                  <span
-                    className="
-                      text-[1.65rem]
-                      font-light
-                      tracking-tight
-                      whitespace-nowrap
-                      text-white/75
-                      transition-opacity
-                    "
-                  >
-                    {logo}
-                  </span>
+            <div className="trusted-by__track" aria-hidden="true">
+              {[0, 1].map((group) => (
+                <div key={group} className="trusted-by__group">
+                  {logos.map((logo) => (
+                    <span key={`${group}-${logo}`} className="trusted-by__wordmark">
+                      {logo}
+                    </span>
+                  ))}
                 </div>
               ))}
-            </motion.div>
-
+            </div>
           </div>
-
         </div>
-
       </Container>
 
     </section>
