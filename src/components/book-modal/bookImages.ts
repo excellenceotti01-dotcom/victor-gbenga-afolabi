@@ -20,7 +20,7 @@ export const BOOK_IMAGES: Record<
   keynote: {
     service: "keynote",
 
-    image: "/images/book/keynote.jpg",
+    image: "/images/media/strategy.jpg",
 
     alt: "Victor Gbenga Afolabi delivering a keynote presentation",
 
@@ -34,7 +34,7 @@ export const BOOK_IMAGES: Record<
   consulting: {
     service: "consulting",
 
-    image: "/images/book/consulting.jpg",
+    image: "/images/media/product-lagos.jpg",
 
     alt: "Victor Gbenga Afolabi in a strategic consulting session",
 
@@ -48,7 +48,7 @@ export const BOOK_IMAGES: Record<
   workshops: {
     service: "workshops",
 
-    image: "/images/book/workshops.jpg",
+    image: "/images/media/mark-hack.jpg",
 
     alt: "Victor Gbenga Afolabi facilitating a workshop",
 
@@ -62,7 +62,7 @@ export const BOOK_IMAGES: Record<
   media: {
     service: "media",
 
-    image: "/images/book/media.jpg",
+    image: "/images/media/youtube-1.jpg",
 
     alt: "Victor Gbenga Afolabi during a media interview",
 

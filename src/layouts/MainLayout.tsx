@@ -65,9 +65,11 @@ export default function MainLayout() {
 
     window.addEventListener("business-carousel-scroll-lock", handlePageScrollLock);
     window.addEventListener("media-wall-scroll-lock", handlePageScrollLock);
+    window.addEventListener("book-modal-scroll-lock", handlePageScrollLock);
     return () => {
       window.removeEventListener("business-carousel-scroll-lock", handlePageScrollLock);
       window.removeEventListener("media-wall-scroll-lock", handlePageScrollLock);
+      window.removeEventListener("book-modal-scroll-lock", handlePageScrollLock);
     };
   }, []);
 

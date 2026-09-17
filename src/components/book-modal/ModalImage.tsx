@@ -29,8 +29,10 @@ function AnimatedImage({
         relative
         h-full
         overflow-hidden
-        rounded-r-[34px]
+        rounded-b-[34px]
         bg-[#070707]
+        lg:rounded-r-[34px]
+        lg:rounded-bl-none
       "
     >
       <img

@@ -38,8 +38,9 @@ export default function ServiceSelection({
     >
       <div
         className="
-          mb-14
+          mb-8
           max-w-2xl
+          lg:mb-14
         "
       >
         <p
@@ -58,9 +59,11 @@ export default function ServiceSelection({
           className="
             mb-6
             font-[var(--font-heading)]
-            text-5xl
+            text-3xl
             leading-[1]
             text-white
+            sm:text-4xl
+            lg:text-5xl
           "
         >
           Let's Build Something
@@ -88,8 +91,10 @@ export default function ServiceSelection({
         className="
           grid
           flex-1
-          grid-cols-2
-          gap-6
+          grid-cols-1
+          gap-4
+          sm:grid-cols-2
+          lg:gap-6
         "
       >
         {services.map((service) => {

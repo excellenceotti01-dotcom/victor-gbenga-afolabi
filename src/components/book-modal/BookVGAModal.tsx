@@ -8,6 +8,7 @@ import BookingForm from "./BookingForm";
 import { BOOK_IMAGES } from "./bookImages";
 import ModalImage from "./ModalImage";
 import ModalOverlay from "./ModalOverlay";
+import { services } from "./services";
 import ServiceSelection from "./ServiceSelection";
 import SuccessState from "./SuccessState";
 
@@ -119,6 +120,22 @@ export default function BookVGAModal({
   ) => {
     if (!formData) return;
 
+    if (field === "service") {
+      const nextService = services.find(
+        (service) => service.id === value
+      );
+
+      if (!nextService) return;
+
+      setSelectedService(nextService);
+      setFormData({
+        ...formData,
+        service: nextService.id,
+        engagementType: "",
+      });
+      return;
+    }
+
     setFormData({
       ...formData,
       [field]: value,
@@ -147,14 +164,26 @@ export default function BookVGAModal({
         className="
           grid
           h-full
-          grid-cols-[1.2fr_.8fr]
+          min-h-0
+          grid-cols-1
+          grid-rows-[minmax(0,1fr)_13rem]
+          lg:grid-cols-[1.2fr_.8fr]
+          lg:grid-rows-1
         "
       >
         <div
+          data-lenis-prevent
           className="
             flex
+            min-h-0
             flex-col
-            p-14
+            overflow-y-auto
+            overscroll-contain
+            p-5
+            [scrollbar-width:none]
+            [&::-webkit-scrollbar]:hidden
+            sm:p-8
+            lg:p-14
           "
         >
           {step === "services" && (
@@ -177,12 +206,14 @@ export default function BookVGAModal({
               >
                 <div
                   className="
-                    mb-10
+                    mb-6
                     rounded-3xl
                     border
                     border-[var(--color-gold)]
                     bg-white/[0.04]
-                    p-6
+                    p-5
+                    lg:mb-10
+                    lg:p-6
                   "
                 >
                   <p
